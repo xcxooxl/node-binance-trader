@@ -153,8 +153,6 @@ const onVirtualTrade = (signal, qty, traded_buy_signal) => {
 }
 
 const onBuySignal = async (signal) => {
-    if (signal.new)
-        notifyNewSignal(signal.type, signal.pair, signal.price)
     const tresult = _.findIndex(
         tradingData.user_payload,
         (o) => o.stratid == signal.stratid,
@@ -164,6 +162,7 @@ const onBuySignal = async (signal) => {
         let userPayload = tradingData.user_payload[tresult]
         let isRealTradingOn = userPayload.trading_type === "real"
         if (isNewSignal) {
+            notifyNewSignal("BUY", signal.pair, signal.price)
             console.log(
                 colors.grey(
                     "BUY_SIGNAL :: ENTER LONG TRADE ::",
@@ -280,8 +279,6 @@ const onBuySignal = async (signal) => {
     }
 }
 const onSellSignal = async (signal) => {
-    if (signal.new)
-        notifyNewSignal(signal.type, signal.pair, signal.price)
     const tresult = _.findIndex(tradingData.user_payload, (o) => {
         return o.stratid == signal.stratid
     })
@@ -411,6 +408,7 @@ const onSellSignal = async (signal) => {
             !signal.new &&
             tradingData.open_trades[signal.pair + signal.stratid]
         ) {
+            notifyNewSignal("SELL", signal.pair, signal.price)
             console.log(
                 colors.grey(
                     "SELL_SIGNAL :: SELL TO EXIT LONG TRADE ::",
