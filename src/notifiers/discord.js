@@ -13,9 +13,9 @@ client.on('ready', async () => {
 });
 
 client.login(env.DISCORD_API_KEY);
-const notifyNewLeaderUpdate = async (delta) => {
+const notifyNewSignal = async (type, ticker, price) => {
     const channel = await client.channels.cache.get(SIGNAL_CHANNEL_ID);
-    channel.send(`@everyone New portfolio update detected:\n ${delta}`);
+    channel.send(`new signal ${type} ${ticker} ${price}`);
 }
 
 // client.on('message', msg => {
@@ -25,4 +25,4 @@ const notifyNewLeaderUpdate = async (delta) => {
 // });
 
 
-module.exports = {notifyNewLeaderUpdate}
+module.exports = {notifyNewSignal}

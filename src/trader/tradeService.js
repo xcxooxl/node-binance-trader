@@ -5,6 +5,7 @@ const BigNumber = require("bignumber.js")
 const colors = require("colors")
 const _ = require("lodash")
 const Task = require("../utils/task")
+const { notifyNewSignal } = require("../notifiers/discord")
 const { socket } = require("./socket")
 const { UpdateOpenTrades } = require("./tradingData")
 const { UpdateMarginPairs } = require("./tradingData")
@@ -152,6 +153,7 @@ const onVirtualTrade = (signal, qty, traded_buy_signal) => {
 }
 
 const onBuySignal = async (signal) => {
+    notifyNewSignal(signal.trading_type,signal.pair,signal.price);
     const tresult = _.findIndex(
         tradingData.user_payload,
         (o) => o.stratid == signal.stratid,
@@ -277,6 +279,7 @@ const onBuySignal = async (signal) => {
     }
 }
 const onSellSignal = async (signal) => {
+    notifyNewSignal(signal.trading_type,signal.pair,signal.price);
     const tresult = _.findIndex(tradingData.user_payload, (o) => {
         return o.stratid == signal.stratid
     })
