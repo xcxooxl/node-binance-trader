@@ -8,6 +8,7 @@ module.exports = envalid.cleanEnv(process.env, {
     BACKTEST_TEST_PAIR: envalid.str({ default: "BTCUSDT" }),
     BINANCE_API_KEY: envalid.str(),
     BINANCE_API_SECRET: envalid.str(),
+    DISCORD_API_KEY: envalid.str(),
     BVA_API_KEY: envalid.str({ default: "" }),
     CONNECT_SERVER_TO_BVA: envalid.bool({ default: true }),
     DATABASE_CONNECT_VIA_SSL: envalid.bool({ default: false }),
