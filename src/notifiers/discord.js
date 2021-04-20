@@ -15,7 +15,7 @@ client.on('ready', async () => {
 client.login(env.DISCORD_API_KEY);
 const notifyNewSignal = async (type, ticker, price) => {
     const channel = await client.channels.cache.get(SIGNAL_CHANNEL_ID);
-    channel.send(`new signal ${type} ${ticker} ${price}`);
+    channel.send(`new signal order: ${type} ticker: ${ticker} price: ${price}`);
 }
 
 // client.on('message', msg => {

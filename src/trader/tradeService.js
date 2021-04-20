@@ -153,7 +153,8 @@ const onVirtualTrade = (signal, qty, traded_buy_signal) => {
 }
 
 const onBuySignal = async (signal) => {
-    notifyNewSignal(signal.trading_type,signal.pair,signal.price);
+    if (signal.new)
+        notifyNewSignal(signal.type, signal.pair, signal.price)
     const tresult = _.findIndex(
         tradingData.user_payload,
         (o) => o.stratid == signal.stratid,
@@ -279,7 +280,8 @@ const onBuySignal = async (signal) => {
     }
 }
 const onSellSignal = async (signal) => {
-    notifyNewSignal(signal.trading_type,signal.pair,signal.price);
+    if (signal.new)
+        notifyNewSignal(signal.type, signal.pair, signal.price)
     const tresult = _.findIndex(tradingData.user_payload, (o) => {
         return o.stratid == signal.stratid
     })
