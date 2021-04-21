@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const env = require('../env');
 const SIGNAL_CHANNEL_ID = '834188214935486544';
+const JAKE_SIGNAL_CHANNEL_ID = '834207626677846017';
 const TEST_CHANNEL_ID = '833667548238184448';
 
 let intents = new Discord.Intents(Discord.Intents.NON_PRIVILEGED);
@@ -13,9 +14,14 @@ client.on('ready', async () => {
 });
 
 client.login(env.DISCORD_API_KEY);
-const notifyNewSignal = async (type, ticker, price) => {
-    const channel = await client.channels.cache.get(SIGNAL_CHANNEL_ID);
+const notifyNewSignal = async (channelId,type, ticker, price) => {
+    const channel = await client.channels.cache.get(channelId);
     channel.send(`new signal order: ${type} ticker: ${ticker} price: ${price}`);
+}
+
+const notifyJakeSignal = async (exchange, ticker, price) => {
+    const channel = await client.channels.cache.get(JAKE_SIGNAL_CHANNEL_ID);
+    channel.send(`new signal: exchange: ${exchange} ticker: ${ticker} price: ${price}`);
 }
 
 // client.on('message', msg => {
@@ -25,4 +31,4 @@ const notifyNewSignal = async (type, ticker, price) => {
 // });
 
 
-module.exports = {notifyNewSignal}
+module.exports = {notifyNewSignal, SIGNAL_CHANNEL_ID,JAKE_SIGNAL_CHANNEL_ID,notifyJakeSignal}
