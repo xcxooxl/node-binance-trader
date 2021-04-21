@@ -21,10 +21,11 @@ const notifyNewSignal = async (channelId,type, ticker, price) => {
 
 const notifyJakeSignal = async (type,exchange, ticker, price) => {
     const channel = await client.channels.cache.get(JAKE_SIGNAL_CHANNEL_ID);
-    channel.send(`new signal:\n
-    type: ${type}\n
-    exchange: ${exchange}\n
-    ticker: ${ticker}\n
+    channel.send(
+    `new signal:
+    type: ${type}
+    exchange: ${exchange}
+    ticker: ${ticker}
     price: ${price}`);
 }
 
