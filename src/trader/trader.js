@@ -9,6 +9,7 @@ app.use(express.json());
 app.get("/", (req, res) => res.send(""))
 app.post('/signal', (req,res) => {
     const {type,ticker,exchange,price} = req.body;
+    console.log(req.body,"body");
     notifyJakeSignal(type,exchange,ticker,price);
     res.status(200).send();
 })
