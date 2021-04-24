@@ -22,11 +22,10 @@ const notifyNewSignal = async (channelId,type, ticker, price) => {
 const notifyJakeSignal = async (type, exchange, ticker, price) => {
     const channel = await client.channels.cache.get(JAKE_SIGNAL_CHANNEL_ID)
     const embed = new Discord.MessageEmbed();
-    embed.addField(ticker, `
-    type: ${type}
+    embed.addField(`${ticker} - ${type}`, `
+    price: ${price}
     exchange: ${exchange}
-    ticker: [${ticker}](https://www.tradingview.com/symbols/${ticker}/?exchange=${exchange})
-    price: ${price}`)
+    [open graph](https://www.tradingview.com/symbols/${ticker}/?exchange=${exchange})`)
     channel.send(embed);
 }
 
