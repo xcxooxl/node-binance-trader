@@ -25,8 +25,8 @@ const notifyJakeSignal = async (type,exchange, ticker, price) => {
     `new signal:
     type: ${type}
     exchange: ${exchange}
-    ticker: ${ticker}
-    price: ${price}`);
+    ticker: [${ticker}](https://www.tradingview.com/symbols/PSGUSDT/?exchange=${exchange})
+    price: ${price}`)
 }
 
 // client.on('message', msg => {
