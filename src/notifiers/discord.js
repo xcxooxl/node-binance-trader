@@ -50,7 +50,8 @@ const notifyJakeSignal = async (type, exchange, ticker, price, period = "") => {
     price: ${price}
     exchange: ${exchange}
     [open graph](${url})`)
-    channel.send(embed)
+    const message = await channel.send(embed);
+    message.react("👍");
 }
 
 // client.on('message', msg => {
