@@ -9,8 +9,8 @@ intents.add("GUILD_MEMBERS")
 const client = new Discord.Client({ ws: { intents: intents } })
 
 client.on("ready", async () => {
-    console.log(`Logged in as ${client.user.tag}!`)
-    // setAllFollowers();
+    const testChannel = client.channels.cache.get(TEST_CHANNEL_ID);
+    testChannel.send("bot restarted");
 })
 
 client.on("messageReactionAdd", async (reaction, user) => {
