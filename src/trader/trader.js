@@ -8,9 +8,9 @@ const app = express()
 app.use(express.json());
 app.get("/", (req, res) => res.send(""))
 app.post('/signal', (req,res) => {
-    const {type,ticker,exchange,price} = req.body;
+    const {type,ticker,exchange,price,period} = req.body;
     console.log(req.body,"body");
-    notifyJakeSignal(type,exchange,ticker,price);
+    notifyJakeSignal(type,exchange,ticker,price,period);
     res.status(200).send();
 })
 app.listen(env.TRADER_PORT, () => console.log("NBT auto trader running.".grey))

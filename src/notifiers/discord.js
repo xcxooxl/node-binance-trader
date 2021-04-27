@@ -19,9 +19,11 @@ const notifyNewSignal = async (channelId,type, ticker, price) => {
     channel.send(`new signal order: ${type} ticker: ${ticker} price: ${price}`);
 }
 
-const notifyJakeSignal = async (type, exchange, ticker, price) => {
+const notifyJakeSignal = async (type, exchange, ticker, price,period) => {
     const channel = await client.channels.cache.get(JAKE_SIGNAL_CHANNEL_ID)
     const embed = new Discord.MessageEmbed();
+    if (period)
+        ticker += ` - ${period}`
     embed.addField(`${ticker} - ${type}`, `
     price: ${price}
     exchange: ${exchange}
