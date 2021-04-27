@@ -6,14 +6,17 @@ const TEST_CHANNEL_ID = "833667548238184448"
 
 let intents = new Discord.Intents(Discord.Intents.NON_PRIVILEGED)
 intents.add("GUILD_MEMBERS")
-const client = new Discord.Client({ ws: { intents: intents } })
+const client = new Discord.Client({ ws: { intents: intents, partials: ["MESSAGE", "CHANNEL", "REACTION"] } })
 
 client.on("ready", async () => {
-    const testChannel = client.channels.cache.get(TEST_CHANNEL_ID);
-    testChannel.send("bot restarted");
+    const testChannel = client.channels.cache.get(TEST_CHANNEL_ID)
+    testChannel.send("bot restarted")
 })
 
 client.on("messageReactionAdd", async (reaction, user) => {
+    if (reaction.partial)
+        await reaction.fetch();
+
     const isJakeSignalChannel = reaction.message.channel.id === JAKE_SIGNAL_CHANNEL_ID
     const isThumbsUp = reaction.emoji.name === "👍"
     const isAuthorSignalBot = reaction.message.author.id === client.user.id
@@ -50,8 +53,8 @@ const notifyJakeSignal = async (type, exchange, ticker, price, period = "") => {
     price: ${price}
     exchange: ${exchange}
     [open graph](${url})`)
-    const message = await channel.send(embed);
-    message.react("👍");
+    const message = await channel.send(embed)
+    message.react("👍")
 }
 
 // client.on('message', msg => {
